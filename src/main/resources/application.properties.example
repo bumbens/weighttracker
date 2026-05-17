@@ -1,0 +1,13 @@
+spring.application.name=weighttracker
+spring.datasource.url=jdbc:postgresql://localhost:5432/weighttracker
+spring.datasource.username=
+spring.datasource.password=
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+jwt.secret=
+jasypt.encryptor.password=
+
+server.error.include-message=always
+server.error.include-binding-errors=always
