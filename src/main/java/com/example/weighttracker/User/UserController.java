@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +22,9 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public List<User> getAllUsers(){
         return userService.getAllUsers();
@@ -29,6 +33,12 @@ public class UserController {
     @GetMapping("/get/{id}")
     public User getUser(UUID id){
         return userService.getUser(id);
+    }
+
+    @GetMapping("/me")
+    public User getCurrentUser(Authentication authentication) {
+        String mail = authentication.getName();
+        return userRepository.findByMail(mail).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @DeleteMapping("/delete/{id}")

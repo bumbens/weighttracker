@@ -33,3 +33,6 @@ export const login = (credentials) =>
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)
     }).then(resp => resp.json())
+
+export const getCurrentUser = () =>
+    fetch(`${BASE_URL}/api/users/me`, { headers: authHeader() }).then(resp => resp.json())
