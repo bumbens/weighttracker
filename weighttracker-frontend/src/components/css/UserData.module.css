@@ -1,0 +1,19 @@
+.container {
+    align-items: center;
+}
+
+.table {
+    margin: 0 auto;
+}
+
+.table tr:nth-child(even) {
+    background-color: rgb(242, 242, 242);
+}
+
+.table td {
+    width: 180px;
+}
+
+.column {
+    width: 200px;
+}

@@ -1,0 +1,33 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.container p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.scale {
+    position: relative;
+    height: 30px;
+    border-radius: 20px;
+    background: linear-gradient(to right, rgb(147, 147, 255), rgb(60, 176, 60), rgb(246, 246, 97), rgb(255, 188, 63), rgb(219, 46, 46))
+}
+
+.marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid black;
+}
+
+.values {
+    display: flex;
+    justify-content: space-between;
+}
