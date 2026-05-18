@@ -3,7 +3,10 @@ package com.example.weighttracker.user;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.example.weighttracker.shared.converter.DoubleCryptoConverter;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,12 +42,15 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    @Convert(converter = DoubleCryptoConverter.class)
     private Double startWeight;
 
     @Column(nullable = false)
+    @Convert(converter = DoubleCryptoConverter.class)
     private Double currentWeight;
 
     @Column(nullable = false)
+    @Convert(converter = DoubleCryptoConverter.class)
     private Double targetWeight;
 
     @Column(nullable = false)
