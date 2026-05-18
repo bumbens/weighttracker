@@ -3,6 +3,7 @@ import { login } from "../../services/api";
 import RegisterUser from "./RegisterUser";
 import styles from "../css/LoginPage.module.css"
 import "../css/LoginPage.module.css"
+import logo from '../../assets/logo.png'
 
 function Login({ onLogin }) {
     const [mail, setMail] = useState("")
@@ -30,6 +31,8 @@ function Login({ onLogin }) {
 
     return (
         <div className={styles.container}>
+            <img src={logo} alt="Logo" className={styles.logo} />
+
             <h1>Sign in</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <label>Email</label>

@@ -7,8 +7,8 @@
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-h1 {
-    margin-bottom: 50px;
+.container h1 {
+    margin-bottom: 40px;
     color: #6f6f6f;
 }
 
@@ -39,4 +39,9 @@ label {
     margin-top: 10px;
     color: #6f6f6f;
     font-size: smaller;
+}
+
+.logo {
+    width: 30%;
+    margin-bottom: 10px;
 }
