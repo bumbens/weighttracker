@@ -41,6 +41,7 @@ public class UserController {
         userService.deleteUser(id);
     }
 
+    // This method is not used in the current implementation, but it can be useful for testing or future features
     @PostMapping("/create")
     public User createUser(@RequestBody User user){
         return userService.createUser(user);

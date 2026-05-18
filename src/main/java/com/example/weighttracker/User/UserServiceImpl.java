@@ -12,6 +12,7 @@ public class UserServiceImpl {
     @Autowired
     private UserRepository userRepository;
 
+    // This method is not used in the current implementation, but it can be useful for testing or future features
     public User createUser(User user){
         return userRepository.save(user);
     }

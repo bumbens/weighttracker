@@ -22,7 +22,7 @@ export const getUsers = () =>
     fetch(`${BASE_URL}/api/users`, { headers: authHeader() }).then(handleResponse)
 
 export const registerUser = (data) => 
-    fetch(`${BASE_URL}/api/users/create`, {
+    fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
