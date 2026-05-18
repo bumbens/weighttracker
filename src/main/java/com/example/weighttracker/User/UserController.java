@@ -30,11 +30,6 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/get/{id}")
-    public User getUser(UUID id){
-        return userService.getUser(id);
-    }
-
     @GetMapping("/me")
     public User getCurrentUser(Authentication authentication) {
         String mail = authentication.getName();

@@ -10,7 +10,7 @@ function UserProfile({ user, weightEntry, refresh, onRefresh }) {
 
     return (
         <div>
-            <UserData user={user} />
+            <UserData user={user} onRefresh={onRefresh} />
             <BMI user={user} onRefresh={onRefresh} />
             <AddMeasurement user={user} weightEntry={weightEntry} onRefresh={onRefresh} />
             <ListMeasurements user={user} refresh={refresh} onRefresh={onRefresh} />

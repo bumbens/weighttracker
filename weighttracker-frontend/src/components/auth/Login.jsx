@@ -7,9 +7,13 @@ function Login({ onLogin }) {
     const [error, setError] = useState("")
 
     const handleLogin = () => {
+        if (!mail || !password) {
+            setError("Please fill in all fields")
+            return
+        }
+        
         login({ mail, password })
             .then(credentials => {
-                console.log(credentials)
                 localStorage.setItem("token", credentials.token)
                 onLogin()
             })

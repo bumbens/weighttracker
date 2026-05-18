@@ -1,11 +1,10 @@
 # WeightTracker
 
-A full-stack body measurement tracking application built with Spring Boot and React. Users can log weekly measurements and monitor progress over time.
-
-
+A full-stack body measurement tracking application built with Spring Boot and React. Users can register, log in, and track weekly measurements with progress monitoring.
 
 ## Features
 
+- JWT-based authentication — registration and login
 - BMI calculation with a visual scale indicator
 - Weekly measurement logging — weight, waist and chest circumference
 - User profile dashboard with start weight, target weight and start date
@@ -16,6 +15,7 @@ A full-stack body measurement tracking application built with Spring Boot and Re
 - Java 17
 - Spring Boot 4
 - Spring Data JPA
+- Spring Security with JWT
 - PostgreSQL
 - Gradle
 
@@ -29,16 +29,21 @@ A full-stack body measurement tracking application built with Spring Boot and Re
 
 ```
 weighttracker/
-├── src/                        # Spring Boot backend
+├── src/
 │   └── main/java/com/example/weighttracker/
-│       ├── User/               # User entity, repository, service, controller
-│       └── WeightEntry/        # WeightEntry entity, repository, service, controller
-└── weighttracker-frontend/     # React frontend
+│       ├── auth/               # Registration and login endpoints
+│       ├── user/               # User entity, repository, service, controller
+│       ├── weightentry/        # WeightEntry entity, repository, service, controller
+│       └── shared/
+│           ├── config/         # Security, JWT, CORS configuration
+│           └── converter/      # Encryption converters
+└── weighttracker-frontend/
     └── src/
         ├── components/
+        │   ├── auth/           # Sign in page
         │   ├── bmi/            # BMI calculator and scale
         │   ├── layout/         # Header, Layout
-        │   └── user/           # UserProfile, UserData, AddMeasurement
+        │   └── user/           # UserProfile, UserData, AddMeasurement, ListMeasurements
         ├── hooks/              # Custom React hooks
         └── services/           # API service layer
 ```
@@ -57,12 +62,13 @@ weighttracker/
 CREATE DATABASE weighttracker;
 ```
 
-2. Configure `src/main/resources/application.properties`:
+2. Copy `src/main/resources/application.properties.example` to `application.properties` and configure:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/weighttracker
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
+jwt.secret=your_jwt_secret_min_32_chars
 ```
 
 3. Run:
@@ -84,13 +90,25 @@ Frontend runs on `http://localhost:5173`
 
 ## API Endpoints
 
+### Authentication
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/users` | Get all users |
-| POST | `/api/users` | Create a user |
-| PUT | `/api/users/{id}` | Update user |
-| PATCH | `/api/users/{id}/weight` | Update current weight |
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Login and receive JWT token |
+
+### Users
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users/me` | Get current authenticated user |
+| PUT | `/api/users/update/{id}` | Update user data |
+| PATCH | `/api/users/update/{id}/weight` | Update current weight |
+| DELETE | `/api/users/delete/{id}` | Delete user |
+
+### Measurements
+| Method | Endpoint | Description |
+|--------|----------|-------------|
 | GET | `/api/weightentry` | Get all entries |
+| GET | `/api/weightentry/user/{userId}` | Get entries for a specific user |
 | POST | `/api/weightentry/create` | Add measurement |
 | PUT | `/api/weightentry/update/{id}` | Update entry |
 | DELETE | `/api/weightentry/delete/{id}` | Delete entry |

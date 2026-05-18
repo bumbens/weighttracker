@@ -34,15 +34,14 @@ public class UserServiceImpl {
         return userRepository.save(user);
     }
 
-    public User updateUser(UUID id, User updatedUser){
-        User user = userRepository.findById(id).orElseThrow(() -> new NoUserException(id));
-        user.setName(updatedUser.getName());
-        user.setAge(updatedUser.getAge());
-        user.setHeight(updatedUser.getHeight());
-        user.setStartDate(updatedUser.getStartDate());
-        user.setStartWeight(updatedUser.getStartWeight());
-        user.setCurrentWeight(updatedUser.getCurrentWeight());
-        user.setTargetWeight(updatedUser.getTargetWeight());
-        return userRepository.save(user);
-    }
+    public User updateUser(UUID id, User updatedUser) {
+    User user = userRepository.findById(id).orElseThrow(() -> new NoUserException(id));
+    user.setName(updatedUser.getName() != null ? updatedUser.getName() : user.getName());
+    user.setAge(updatedUser.getAge() != null ? updatedUser.getAge() : user.getAge());
+    user.setHeight(updatedUser.getHeight() != null ? updatedUser.getHeight() : user.getHeight());
+    user.setStartWeight(updatedUser.getStartWeight() != null ? updatedUser.getStartWeight() : user.getStartWeight());
+    user.setTargetWeight(updatedUser.getTargetWeight() != null ? updatedUser.getTargetWeight() : user.getTargetWeight());
+    user.setStartDate(updatedUser.getStartDate() != null ? updatedUser.getStartDate() : user.getStartDate());
+    return userRepository.save(user);
+}
 }
