@@ -27,7 +27,7 @@ function ListMeasurements({ user, refresh, onRefresh }) {
                             <td>{entry.chest} cm</td>
                             <td><button className={styles.deleteButton} onClick={() => {
                                 deleteWeightEntry(entry.id)
-                                onRefresh()
+                                    .then(() => onRefresh())
                             }}>Delete</button></td>
                         </tr>
                     ))}

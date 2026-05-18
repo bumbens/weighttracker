@@ -37,7 +37,7 @@ public class WeightService {
 
         List<WeightEntry> remainingEntries = weightRepository.findByUserIdOrderByDateAsc(userId);
         if (remainingEntries.isEmpty()) {
-            userService.updateWeight(userId, 0);
+            userService.updateWeight(userId, userService.getUser(userId).getStartWeight());
         } else {
             WeightEntry latestEntry = remainingEntries.get(remainingEntries.size() - 1);
             userService.updateWeight(userId, latestEntry.getWeight());

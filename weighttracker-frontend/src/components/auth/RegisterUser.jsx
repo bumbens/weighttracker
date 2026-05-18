@@ -41,7 +41,7 @@ function RegisterUser({ onRegister }) {
             <input type="number" value={startWeight} onChange={e => setStartWeight(e.target.value)} />
             <label>Target Weight</label>
             <input type="number" value={targetWeight} onChange={e => setTargetWeight(e.target.value)} />
-            <button onClick={handleRegister}>Register</button>
+            <button className={styles.button} onClick={handleRegister}>Register</button>
 
         </div>
     )

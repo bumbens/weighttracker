@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login } from "../../services/api";
 import RegisterUser from "./RegisterUser";
 import styles from "../css/LoginPage.module.css"
+import "../css/LoginPage.module.css"
 
 function Login({ onLogin }) {
     const [mail, setMail] = useState("")
@@ -35,8 +36,10 @@ function Login({ onLogin }) {
             <input type="email" value={mail} onChange={e => setMail(e.target.value)} />
             <label>Password</label>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <div className={styles.buttonContainer}>
             <button onClick={handleLogin}>Sign in</button>
             <button onClick={() => setShowRegister(true)}>Don't have an account? Register</button>
+            </div>
         </div>
     )
 }
