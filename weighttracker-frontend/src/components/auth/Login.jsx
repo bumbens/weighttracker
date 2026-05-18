@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../../services/api";
 import RegisterUser from "./RegisterUser";
+import styles from "../css/LoginPage.module.css"
 
 function Login({ onLogin }) {
     const [mail, setMail] = useState("")
@@ -27,7 +28,7 @@ function Login({ onLogin }) {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Sign in</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <label>Email</label>

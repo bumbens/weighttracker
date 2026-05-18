@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerUser } from "../../services/api";
+import styles from "../css/Registration.module.css"
 
 function RegisterUser({ onRegister }) {
     const [name, setName] = useState("")
@@ -18,13 +19,13 @@ function RegisterUser({ onRegister }) {
         }
 
         const date = new Date().toLocaleDateString('en-CA')
-        registerUser({ name, mail, age, height, startWeight, targetWeight, startDate: date })
+        registerUser({ name, mail, age, password, height, startWeight, targetWeight, startDate: date })
             .then(() => onRegister())
             .catch(err => alert("Registration failed"))
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Register</h1>
             <label>Name</label>
             <input type="text" value={name} onChange={e => setName(e.target.value)} />
