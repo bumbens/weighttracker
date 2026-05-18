@@ -26,7 +26,7 @@ export const registerUser = (data) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }).then(handleResponse)
+    }).then(resp => resp.json())
 
 export const getWeightEntries = () =>
     fetch(`${BASE_URL}/api/weightentry`, { headers: authHeader() }).then(handleResponse)
