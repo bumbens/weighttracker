@@ -20,7 +20,7 @@ function RegisterUser({ onRegister }) {
 
         const date = new Date().toLocaleDateString('en-CA')
         registerUser({ name, mail, age, password, height, startWeight, targetWeight, startDate: date })
-            console.log("Registering user:", { name, mail, age, password, height, startWeight, targetWeight, startDate: date })
+        console.log("Registering user:", { name, mail, age, password, height, startWeight, targetWeight, startDate: date })
             .then(() => onRegister())
             .catch(err => alert("Registration failed"))
     }
@@ -43,7 +43,7 @@ function RegisterUser({ onRegister }) {
             <label>Target Weight</label>
             <input type="number" value={targetWeight} onChange={e => setTargetWeight(e.target.value)} />
             <button onClick={handleRegister}>Register</button>
-            
+
         </div>
     )
 
