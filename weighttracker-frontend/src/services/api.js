@@ -21,6 +21,13 @@ const handleResponse = (resp) => {
 export const getUsers = () =>
     fetch(`${BASE_URL}/api/users`, { headers: authHeader() }).then(handleResponse)
 
+export const registerUser = (data) => 
+    fetch(`${BASE_URL}/api/users/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }).then(handleResponse)
+
 export const getWeightEntries = () =>
     fetch(`${BASE_URL}/api/weightentry`, { headers: authHeader() }).then(handleResponse)
 

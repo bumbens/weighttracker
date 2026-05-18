@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { login } from "../../services/api";
+import RegisterUser from "./RegisterUser";
 
 function Login({ onLogin }) {
     const [mail, setMail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const [showRegister, setShowRegister] = useState(false)
 
     const handleLogin = () => {
         if (!mail || !password) {
@@ -20,6 +22,10 @@ function Login({ onLogin }) {
             .catch(err => setError("Login failed"))
     }
 
+    if (showRegister) {
+        return <RegisterUser onRegister={() => setShowRegister(false)} />;
+    }
+
     return (
         <div>
             <h1>Sign in</h1>
@@ -29,7 +35,7 @@ function Login({ onLogin }) {
             <label>Password</label>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button onClick={handleLogin}>Sign in</button>
-
+            <button onClick={() => setShowRegister(true)}>Don't have an account? Register</button>
         </div>
     )
 }
