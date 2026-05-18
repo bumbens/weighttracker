@@ -15,7 +15,6 @@ function UserData({ user, onRefresh }) {
     
     if (!user) return null
 
-    
 
     const handleUpdate = () => {
         updateUser(user.id.toString(), { age, height, startWeight, targetWeight, startDate })

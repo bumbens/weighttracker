@@ -20,7 +20,6 @@ function RegisterUser({ onRegister }) {
 
         const date = new Date().toLocaleDateString('en-CA')
         registerUser({ name, mail, age, password, height, startWeight, targetWeight, startDate: date })
-        console.log("Registering user:", { name, mail, age, password, height, startWeight, targetWeight, startDate: date })
             .then(() => onRegister())
             .catch(err => alert("Registration failed"))
     }

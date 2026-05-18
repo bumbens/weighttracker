@@ -1,4 +1,4 @@
-const BASE_URL = 'https://weighttracker-production-5966.up.railway.app'
+const BASE_URL = import.meta.env.VITE_API_URL
 
 const authHeader = () => {
     const token = localStorage.getItem("token")
@@ -9,6 +9,8 @@ const authHeader = () => {
 }
 
 const handleResponse = (resp) => {
+    console.log("response status:", resp.status, resp.url)
+
     if (resp.status === 401 || resp.status === 403) {
         localStorage.removeItem("token")
         window.location.reload()
