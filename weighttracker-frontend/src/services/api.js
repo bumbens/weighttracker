@@ -9,7 +9,6 @@ const authHeader = () => {
 }
 
 const handleResponse = (resp) => {
-    console.log("response status:", resp.status, resp.url)
 
     if (resp.status === 401 || resp.status === 403) {
         localStorage.removeItem("token")

@@ -3,6 +3,7 @@ import AddMeasurement from './AddMeasurement'
 import BMI from '../bmi/BMI'
 import { useState } from 'react'
 import ListMeasurements from './ListMeasurements'
+import useWeightEntriesByUser from '../../hooks/useWeightEntriesByUser'
 
 function UserProfile({ user, weightEntry, refresh, onRefresh }) {
 
@@ -10,7 +11,7 @@ function UserProfile({ user, weightEntry, refresh, onRefresh }) {
 
     return (
         <div>
-            <UserData user={user} onRefresh={onRefresh} />
+            <UserData user={user} onRefresh={onRefresh} refresh={refresh} />
             <BMI user={user} onRefresh={onRefresh} />
             <AddMeasurement user={user} weightEntry={weightEntry} onRefresh={onRefresh} />
             <ListMeasurements user={user} refresh={refresh} onRefresh={onRefresh} />

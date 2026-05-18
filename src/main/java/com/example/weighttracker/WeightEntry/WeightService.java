@@ -29,6 +29,7 @@ public class WeightService {
         return savedEntry;
     }
 
+
     public void removeEntry(UUID id) {
         WeightEntry entry = weightRepository.findById(id).orElseThrow();
         UUID userId = entry.getUser().getId();
