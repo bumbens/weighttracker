@@ -33,7 +33,7 @@ public class SecurityConfig {
         http
             .cors(cors -> cors.configurationSource(request -> {
                 var config = new CorsConfiguration();
-                config.setAllowedOrigins(List.of("http://localhost:5173"));
+                config.setAllowedOrigins(List.of("http://localhost:5173", "https://weighttracker-two.vercel.app/"));
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
                 config.setAllowedHeaders(List.of("*"));
                 return config;
