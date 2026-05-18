@@ -7,6 +7,11 @@
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
+h1 {
+    margin-bottom: 50px;
+    color: #6f6f6f;
+}
+
 .buttonContainer {
     margin-top: 50px;
     display: flex;
@@ -19,13 +24,19 @@ button {
     padding: 6px 12px;
     border: none;
     border-radius: 8px;
-    background-color: #7ebcff;
+    background-color: #9f9e9e;
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     margin: 5px;
 }
 
 button:hover {
-    background-color: #72a7dd;
+    background-color: #797979;
+}
+
+label {
+    margin-top: 10px;
+    color: #6f6f6f;
+    font-size: smaller;
 }
