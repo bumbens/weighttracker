@@ -5,6 +5,7 @@ import UserProfile from "./components/user/UserProfile"
 import Login from "./components/auth/Login"
 import useUser from "./hooks/useUser"
 import useWeightEntries from "./hooks/useWeightEntries"
+import useWeightEntriesByUser from "./hooks/useWeightEntriesByUser"
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"))
@@ -20,7 +21,7 @@ function App() {
 
   function AuthApp({refresh, setRefresh}) {
     const user = useUser(refresh)
-    const weightEntries = useWeightEntries(refresh)
+    const weightEntries = useWeightEntriesByUser(user?.id, refresh)
 
   useEffect(() => {
     if (user) {

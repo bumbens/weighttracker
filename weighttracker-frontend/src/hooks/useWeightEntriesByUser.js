@@ -3,15 +3,23 @@ import { getWeightEntriesByUserId } from "../services/api";
 
 function useWeightEntriesByUser(userId, refresh) {
     const [entries, setEntries] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (userId !== null) {
-            getWeightEntriesByUserId(userId)
-                .then(data => setEntries(data))
-        }
+
+        if (!userId) return;
+        setIsLoading(true);
+
+        getWeightEntriesByUserId(userId)
+            .then(data => {
+                setEntries(data)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }, [userId, refresh])
 
-    return entries
+    return { entries, isLoading }
 }
 
 export default useWeightEntriesByUser

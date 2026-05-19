@@ -4,7 +4,7 @@ import styles from '../css/ListMeasurements.module.css'
 
 function ListMeasurements({ user, refresh, onRefresh }) {
 
-    const entries = useWeightEntriesByUser(user.id, refresh)
+    const {entries, isLoading} = useWeightEntriesByUser(user.id, refresh)
 
     return (
         <div className={styles.container}>
@@ -19,7 +19,8 @@ function ListMeasurements({ user, refresh, onRefresh }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {entries.toReversed().slice(0, 5).map(entry => (
+                    {isLoading ? null : (
+                    entries.toReversed().slice(0, 5).map(entry => (
                         <tr key={entry.id}>
                             <td>{entry.date}</td>
                             <td>{entry.weight} kg</td>
@@ -30,7 +31,7 @@ function ListMeasurements({ user, refresh, onRefresh }) {
                                     .then(() => onRefresh())
                             }}>Delete</button></td>
                         </tr>
-                    ))}
+                    )))}
 
                 </tbody>
             </table>

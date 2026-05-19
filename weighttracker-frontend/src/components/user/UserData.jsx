@@ -3,7 +3,6 @@ import { updateUser } from "../../services/api"
 import UpdateUser from "./UpdateUser"
 import { useState } from 'react'
 import "../css/App.css"
-import useWeightEntriesByUser from '../../hooks/useWeightEntriesByUser'
 
 function UserData({ user, onRefresh, refresh }) {
 
@@ -13,8 +12,7 @@ function UserData({ user, onRefresh, refresh }) {
     const [startWeight, setStartWeight] = useState(user?.startWeight)
     const [targetWeight, setTargetWeight] = useState(user?.targetWeight)
     const [startDate, setStartDate] = useState(user?.startDate)
-    const useEntries = useWeightEntriesByUser(user?.id, refresh)  
-    
+
     if (!user) return null
 
 
@@ -25,13 +23,6 @@ function UserData({ user, onRefresh, refresh }) {
                 onRefresh()
             })
     }
-
-    const weightLost = () => {
-        if (useEntries == null || useEntries.length === 0) return 0
-        const latestWeight = useEntries[useEntries.length - 1].weight
-        return (user.startWeight - latestWeight).toFixed(1)
-        
-    } 
 
     return (
         <div className={styles.container} >
@@ -55,7 +46,6 @@ function UserData({ user, onRefresh, refresh }) {
                 </tbody>
             </table>
 
-            <p className={styles.weightLost}>Weight lost: {weightLost()} kg</p>
             <button className={styles.updateButton} onClick={() => setIsOpen(true)} >Update data</button>
             <UpdateUser isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <h2>Update User Data</h2>
