@@ -10,8 +10,7 @@ function Header({user}) {
     return (
         <div>
             <Navbar />
-            <h1>Hello {user.name}</h1>
-            <h3>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
+            
             
         </div>
     )
