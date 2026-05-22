@@ -2,7 +2,6 @@ import { useState } from "react";
 import { login } from "../../services/api";
 import RegisterUser from "./RegisterUser";
 import styles from "../css/LoginPage.module.css"
-import "../css/LoginPage.module.css"
 import logo from '../../assets/logo.png'
 
 function Login({ onLogin }) {
