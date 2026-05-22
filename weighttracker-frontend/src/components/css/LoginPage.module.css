@@ -37,8 +37,9 @@ button:hover {
 
 label {
     margin-top: 10px;
+    margin-bottom: 10px;
     color: #6f6f6f;
-    font-size: smaller;
+    font-size: medium;
 }
 
 .logo {
@@ -56,4 +57,9 @@ label {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+h1{ 
+    font-size: 36px;
 }

@@ -50,10 +50,15 @@
   }
 }
 
+html{
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   padding-top: env(safe-area-inset-top);
+  height: 100%;
 }
 
 #root {
