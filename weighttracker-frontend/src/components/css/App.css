@@ -8,3 +8,46 @@ input {
     -webkit-text-fill-color: black;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
+}
+
+a {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+    color: rgb(0, 0, 0);
+}
+
+.greenButton {
+    background-color: rgb(52, 150, 45);
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}

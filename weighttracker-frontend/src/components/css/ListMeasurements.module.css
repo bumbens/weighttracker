@@ -24,9 +24,19 @@
     
 }
 
-.deleteButton {
-    background-color: rgb(255, 100, 100);
+.redButton {
+    background-color: rgb(255, 129, 129);
     border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.greenButton{
+    background-color: rgb(52, 150, 45);
+    border: none;
+    margin-top: 10px;
     border-radius: 5px;
     color: white;
     padding: 5px 10px;

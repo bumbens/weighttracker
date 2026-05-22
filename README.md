@@ -43,7 +43,7 @@ weighttracker/
         │   ├── auth/           # Sign in page
         │   ├── bmi/            # BMI calculator and scale
         │   ├── layout/         # Header, Layout
-        │   └── user/           # UserProfile, UserData, AddMeasurement, ListMeasurements
+        │   └── user/           # UserProfile, UserData, AddMeasurement, RecentMeasurements
         ├── hooks/              # Custom React hooks
         └── services/           # API service layer
 ```

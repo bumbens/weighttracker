@@ -1,6 +1,6 @@
 import styles from '../css/UserData.module.css'
 import { updateUser } from "../../services/api"
-import UpdateUser from "./UpdateUser"
+import Modal from "./Modal"
 import { useState } from 'react'
 import "../css/App.css"
 
@@ -46,8 +46,8 @@ function UserData({ user, onRefresh, refresh }) {
                 </tbody>
             </table>
 
-            <button className={styles.updateButton} onClick={() => setIsOpen(true)} >Update data</button>
-            <UpdateUser isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <button className="greenButton" onClick={() => setIsOpen(true)} >Update data</button>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <h2>Update User Data</h2>
                 <p>Edit your information below:</p>
                 <input type="text" value={age} onChange={e => setAge(e.target.value)} />
@@ -55,9 +55,9 @@ function UserData({ user, onRefresh, refresh }) {
                 <input type="text" value={startWeight} onChange={e => setStartWeight(e.target.value)} />
                 <input type="text" value={targetWeight} onChange={e => setTargetWeight(e.target.value)} />
                 <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-                <button onClick={handleUpdate}>Save</button>
-                <button onClick={() => setIsOpen(false)}>Close</button>
-            </UpdateUser>
+                <button className="greenButton" onClick={handleUpdate}>Save</button>
+                <button className="redButton" onClick={() => setIsOpen(false)}>Close</button>
+            </Modal>
         </div>
     )
 }
