@@ -50,10 +50,15 @@ function UserData({ user, onRefresh, refresh }) {
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <h2>Update User Data</h2>
                 <p>Edit your information below:</p>
+                <label>Your age</label>
                 <input type="text" value={age} onChange={e => setAge(e.target.value)} />
+                <label>Your height</label>
                 <input type="text" value={height} onChange={e => setHeight(e.target.value)} />
+                <label>Start weight</label>
                 <input type="text" value={startWeight} onChange={e => setStartWeight(e.target.value)} />
+                <label>Target weight</label>
                 <input type="text" value={targetWeight} onChange={e => setTargetWeight(e.target.value)} />
+                <label>Start date</label>
                 <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
                 <button className="greenButton" onClick={handleUpdate}>Save</button>
                 <button className="redButton" onClick={() => setIsOpen(false)}>Close</button>

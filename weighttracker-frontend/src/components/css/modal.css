@@ -22,3 +22,9 @@
     max-width: 300px;
 }
 
+@media (prefers-color-scheme: dark) {
+    .modal {
+        background: #1a1a2e;
+        color: #c3cfe2;
+    }
+}

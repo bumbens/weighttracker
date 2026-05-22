@@ -42,12 +42,3 @@ a {
     color: rgb(0, 0, 0);
 }
 
-.greenButton {
-    background-color: rgb(52, 150, 45);
-    border: none;
-    margin-top: 10px;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-}

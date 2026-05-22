@@ -13,10 +13,10 @@
 }
 
 .table tr:nth-child(even) {
-    background-color: rgb(160, 220, 255);
+    background-color: rgb(214, 240, 255);
 }
 
-@media (max-width: 768px) {
+@media screen and (prefers-color-scheme: dark) {
     .table tr:nth-child(even) {
         background-color: rgb(14, 14, 14);
         
