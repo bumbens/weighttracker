@@ -24,7 +24,7 @@ public class MeasurementService {
 
         Measurement savedMeasurement = measurementRepository.save(measurement);
 
-        if(savedMeasurement.getId() == 1L) {
+        if(savedMeasurement.getMeasurementType().getId() == 1L) {
             userService.updateWeight(savedMeasurement.getUser().getId(), savedMeasurement.getValue());
         }
             
