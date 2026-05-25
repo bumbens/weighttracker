@@ -19,8 +19,40 @@ const handleResponse = (resp) => {
 
 }
 
+
+/* GET */
+
 export const getUsers = () =>
     fetch(`${BASE_URL}/api/users`, { headers: authHeader() }).then(handleResponse)
+
+
+export const getMeasurementsByUserId = (userId) =>
+    fetch(`${BASE_URL}/measurements/${userId}`, { headers: authHeader() }).then(handleResponse)
+
+export const getMeasurementTypes = () =>
+    fetch(`${BASE_URL}/measurement-types`, {headers: authHeader()}).then(handleResponse)
+
+export const getCurrentUser = () =>
+    fetch(`${BASE_URL}/api/users/me`, { headers: authHeader() }).then(handleResponse)
+
+export const getUserPreferences = (userId) =>
+    fetch(`${BASE_URL}/preferences/${userId}`, {headers: authHeader() }).then(handleResponse)
+
+/* POST */
+
+export const login = (credentials) =>
+    fetch(`${BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+    }).then(resp => resp.json())
+
+export const savePreferences = (data) => 
+    fetch(`${BASE_URL}/preferences`, {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(data)
+    }).then(handleResponse)
 
 export const registerUser = (data) => 
     fetch(`${BASE_URL}/auth/register`, {
@@ -29,21 +61,29 @@ export const registerUser = (data) =>
         body: JSON.stringify(data)
     }).then(resp => resp.json())
 
-export const getWeightEntries = () =>
-    fetch(`${BASE_URL}/api/weightentry`, { headers: authHeader() }).then(handleResponse)
 
-export const getWeightEntriesByUserId = (userId) =>
-    fetch(`${BASE_URL}/api/weightentry/user/${userId}`, { headers: authHeader() }).then(handleResponse)
-
-export const addWeightEntry = (data) =>
-    fetch(`${BASE_URL}/api/weightentry/create`, {
+export const addMeasurement = (data) => 
+    fetch(`${BASE_URL}/measurements`, {
         method: 'POST',
         headers: authHeader(),
         body: JSON.stringify(data)
     }).then(handleResponse)
 
-export const deleteWeightEntry = (id) =>
-    fetch(`${BASE_URL}/api/weightentry/delete/${id}`, {
+
+/* PUT */
+
+export const updateUser = (id, data) =>
+    fetch(`${BASE_URL}/api/users/update/${id}`, {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify(data)
+    }).then(handleResponse)
+
+
+/* DELETE */
+
+export const deleteMeasurement = (id) =>
+    fetch(`${BASE_URL}/measurements/delete/${id}`, {
         method: 'DELETE',
         headers: authHeader()
     }).then(resp => {
@@ -54,19 +94,11 @@ export const deleteWeightEntry = (id) =>
     }
     )
 
-export const updateUser = (id, data) =>
-    fetch(`${BASE_URL}/api/users/update/${id}`, {
-        method: 'PUT',
+
+/* PATCH */
+
+export const setPreferencesConfigured = (id) => 
+    fetch(`${BASE_URL}/api/users/${id}/preferences-configured`, {
+        method: 'PATCH',
         headers: authHeader(),
-        body: JSON.stringify(data)
     }).then(handleResponse)
-
-export const login = (credentials) =>
-    fetch(`${BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
-    }).then(resp => resp.json())
-
-export const getCurrentUser = () =>
-    fetch(`${BASE_URL}/api/users/me`, { headers: authHeader() }).then(handleResponse)

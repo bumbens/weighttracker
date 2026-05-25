@@ -1,14 +1,11 @@
 import styles from '../css/BMI.module.css'
-import useWeightEntriesByUser from '../../hooks/useWeightEntriesByUser'
 
 function BMIScale({ bmi, user, refresh }) {
 
-    const { entries, isLoading } = useWeightEntriesByUser(user?.id, refresh)
 
     const weightLost = () => {
-        if (entries.length === 0) return 0
-        const latestWeight = entries[entries.length - 1].weight
-        return (user.startWeight - latestWeight).toFixed(1)
+        
+        return (user.startWeight - user.currentWeight).toFixed(1)
     }
 
     const isLoss = weightLost() > 0
@@ -46,11 +43,9 @@ function BMIScale({ bmi, user, refresh }) {
 
 
             </div>
-            {isLoading ? null : (
                 <p style={{ color: isLoss ? 'green' : 'red' }}>
                     {isLoss ? `Great job! You've lost ${weightLost()} kg so far!` : "Keep going, you can do it!"}
                 </p>
-            )}
         </div>
     )
 }

@@ -1,0 +1,66 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.fadeIn {
+    animation: fadeIn 0.8s ease-in forwards;
+}
+
+.fadeOut {
+    animation: fadeOut 0.8s ease-out forwards;
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 2rem 0;
+    min-width: 250px;
+}
+
+.table td {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.table thead td {
+    font-weight: 500;
+    color: #6f6f6f;
+    border-bottom: 1px solid #c3cfe2;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.heading{
+    color: #6f6f6f;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #6a5acd;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(10px); }
+}
+
+@media screen and (max-width: 768px) {
+    .heading{
+        font-size: 2rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+}

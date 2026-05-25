@@ -5,8 +5,10 @@ import UserProfile from "./components/user/UserProfile"
 import Home from "./components/home/Home"
 import Login from "./components/auth/Login"
 import useUser from "./hooks/useUser"
-import useWeightEntriesByUser from "./hooks/useWeightEntriesByUser"
+import useMeasurementsByUser from "./hooks/useMeasurementsByUser"
 import AllMeasurements from "./components/user/AllMeasurements"
+import MeasurementPreferencesSetup from "./components/user/MeasurementPreferencesSetup"
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"))
@@ -22,7 +24,7 @@ function App() {
 
 function AuthApp({ refresh, setRefresh }) {
   const user = useUser(refresh)
-  const weightEntries = useWeightEntriesByUser(user?.id, refresh)
+  const { entries: measurements, isLoading } = useMeasurementsByUser(user?.id, refresh)
 
   useEffect(() => {
     if (user) {
@@ -30,15 +32,16 @@ function AuthApp({ refresh, setRefresh }) {
     }
   }, [user])
 
-
+  if (user && !user.preferencesConfigured) {
+    return <MeasurementPreferencesSetup user={user} onRefresh={() => setRefresh(r => r + 1)} />
+  }
 
   return (
 
     <Routes>
       <Route element={<Layout user={user} />}>
-        <Route path="/" element={<Home user={user} weightEntry={weightEntries} refresh={refresh} onRefresh={() => setRefresh(r => r + 1)} />} />
-        <Route path="/measurements" element={<AllMeasurements user={user} weightEntry={weightEntries} onRefresh={() => setRefresh(r => r + 1)} />} />
-        <Route path="/profile" element={<UserProfile user={user} weightEntry={weightEntries} refresh={refresh} onRefresh={() => setRefresh(r => r + 1)} />} />
+        <Route path="/" element={<Home user={user} measurements={measurements} refresh={refresh} onRefresh={() => setRefresh(r => r + 1)} />} />
+        <Route path="/measurements" element={<AllMeasurements user={user} measurements={measurements} refresh={refresh} onRefresh={() => setRefresh(r => r + 1)} />} />        <Route path="/profile" element={<UserProfile user={user} measurements={measurements} refresh={refresh} onRefresh={() => setRefresh(r => r + 1)} />} />
       </Route>
     </Routes>
   )

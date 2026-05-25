@@ -35,6 +35,12 @@ public class UserServiceImpl {
         return userRepository.save(user);
     }
 
+    public User setPreferencesConfigured(UUID id){
+        User user = userRepository.findById(id).orElseThrow(() -> new NoUserException(id));
+        user.setPreferencesConfigured(true);
+        return userRepository.save(user);
+    }
+
     public User updateUser(UUID id, User updatedUser) {
     User user = userRepository.findById(id).orElseThrow(() -> new NoUserException(id));
     user.setName(updatedUser.getName() != null ? updatedUser.getName() : user.getName());

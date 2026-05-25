@@ -47,6 +47,11 @@ public class UserController {
         return userService.createUser(user);
     }
 
+    @PatchMapping("/{id}/preferences-configured")
+    public User setPreferencesConfigured(@PathVariable UUID id){
+        return userService.setPreferencesConfigured(id);
+    }
+
     @PatchMapping("update/{id}/weight")
     public User updateWeight(@PathVariable UUID id, @RequestBody double weight) {
         return userService.updateWeight(id, weight);

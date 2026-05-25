@@ -1,11 +1,9 @@
 import styles from '../css/BMI.module.css'
 import BMIScale from './BMIScale'
-import useWeightEntriesByUser from '../../hooks/useWeightEntriesByUser'
 
 function BMI({ user, refresh }) {
 
     
-    const weightEntries = useWeightEntriesByUser(user.id)
     const calculateBMI = () => {
         const heightM = user.height / 100
         return (user.currentWeight / (heightM ** 2)).toFixed(1)
@@ -13,7 +11,7 @@ function BMI({ user, refresh }) {
 
     return (
         <div>
-            <BMIScale bmi={calculateBMI()} user={user} entries={weightEntries} refresh={refresh} />
+            <BMIScale bmi={calculateBMI()} user={user} refresh={refresh} />
         </div>
     )
 

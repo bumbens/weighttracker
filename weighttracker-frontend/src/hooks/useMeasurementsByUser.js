@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getWeightEntriesByUserId } from "../services/api";
+import { getMeasurementsByUserId } from "../services/api";
 
-function useWeightEntriesByUser(userId, refresh) {
+function useMeasurementsByUser(userId, refresh) {
     const [entries, setEntries] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
@@ -10,7 +10,7 @@ function useWeightEntriesByUser(userId, refresh) {
         if (!userId) return;
         setIsLoading(true);
 
-        getWeightEntriesByUserId(userId)
+        getMeasurementsByUserId(userId)
             .then(data => {
                 setEntries(data)
             })
@@ -22,4 +22,4 @@ function useWeightEntriesByUser(userId, refresh) {
     return { entries, isLoading }
 }
 
-export default useWeightEntriesByUser
+export default useMeasurementsByUser

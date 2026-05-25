@@ -48,6 +48,10 @@ label {
     animation: slideDown 0.6s ease-out;
 }
 
+.preferences tr {
+    width: 500px;
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;

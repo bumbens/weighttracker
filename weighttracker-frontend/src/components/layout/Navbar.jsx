@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import '../css/Navbar.css'
-import AddMeasurement from '../user/AddMeasurement.jsx'
 
 const Navbar = () => {
 

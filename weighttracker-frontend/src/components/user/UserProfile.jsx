@@ -3,11 +3,11 @@ import UserData from './UserData'
 import BMI from '../bmi/BMI'
 import { useState } from 'react'
 
-import useWeightEntriesByUser from '../../hooks/useWeightEntriesByUser'
+import useMeasurementsByUser from '../../hooks/useMeasurementsByUser'
 
-function UserProfile({ user, weightEntry, refresh, onRefresh }) {
+function UserProfile({ user, measurements, refresh, onRefresh }) {
 
-    if (!user || !weightEntry) return null
+    if (!user || !measurements) return null
 
     return (
         <div>
