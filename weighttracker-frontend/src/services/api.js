@@ -79,6 +79,12 @@ export const updateUser = (id, data) =>
         body: JSON.stringify(data)
     }).then(handleResponse)
 
+export const updatePreferences = (id, data) =>
+    fetch(`${BASE_URL}/preferences/${id}`, {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify(data)
+    }).then(handleResponse)
 
 /* DELETE */
 

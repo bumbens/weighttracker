@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserMeasurementPreferenceService {
     
@@ -20,8 +22,10 @@ public class UserMeasurementPreferenceService {
         return userMeasurementPreferenceRepository.saveAll(preferences);
     }
 
-    public void updatePreferences(List<UserMeasurementPreference> preferences) {
-        getPreferencesByUserId(preferences.get(0).getUser().getId()).forEach(pref -> userMeasurementPreferenceRepository.delete(pref));
+    @Transactional
+    public void updatePreferences(UUID userId, List<UserMeasurementPreference> preferences) {
+        userMeasurementPreferenceRepository.deleteByUserId(userId);
         userMeasurementPreferenceRepository.saveAll(preferences);
     }
+
 }

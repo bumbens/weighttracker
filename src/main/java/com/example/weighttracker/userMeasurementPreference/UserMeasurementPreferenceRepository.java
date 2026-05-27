@@ -9,5 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserMeasurementPreferenceRepository extends JpaRepository<UserMeasurementPreference, Long> {
 
     List<UserMeasurementPreference> findByUserId(UUID userId);
+    void deleteByUserId(UUID userId);
     
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,9 @@ public class UserMeasurementPreferencesController {
         return userMeasurementPreferenceService.savePreferences(userMeasurementPreferences);
     }
 
-    @PostMapping("/update")
-    public void updatePreferences(@RequestBody List<UserMeasurementPreference> userMeasurementPreferences) {
-        userMeasurementPreferenceService.updatePreferences(userMeasurementPreferences);
+    @PutMapping("/{userId}")
+    public List<UserMeasurementPreference> updatePreferences(@PathVariable UUID userId, @RequestBody List<UserMeasurementPreference> userMeasurementPreferences) {
+        userMeasurementPreferenceService.updatePreferences(userId, userMeasurementPreferences);
+        return userMeasurementPreferenceService.getPreferencesByUserId(userId);
     }
 }

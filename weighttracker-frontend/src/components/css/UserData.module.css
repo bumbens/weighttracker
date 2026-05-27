@@ -40,12 +40,7 @@
     width: 200px;
 }
 
-.updateButton {
-    background-color: rgb(52, 150, 45);
-    border: none;
-    margin-top: 10px;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
+.name {
+    width: 150px;
+    margin-right: 20px;
 }

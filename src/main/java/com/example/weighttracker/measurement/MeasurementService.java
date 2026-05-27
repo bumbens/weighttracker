@@ -33,6 +33,18 @@ public class MeasurementService {
     }
 
     public void deleteMeasurement(Long id) {
+        Measurement measurement = measurementRepository.findById(id).orElse(null);
         measurementRepository.deleteById(id);
+
+        if(measurement != null && measurement.getMeasurementType().getId() == 1L) {
+            UUID userId = measurement.getUser().getId();
+            List<Measurement> remaining = measurementRepository.findByUserIdAndMeasurementTypeId(userId, 1L);
+            if (!remaining.isEmpty()) {
+                Measurement latest = remaining.get(remaining.size() - 1);
+                userService.updateWeight(userId, latest.getValue());
+            } else {
+                userService.updateWeight(userId, userService.getUser(userId).getStartWeight()); // or some default value
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import { deleteMeasurement, addMeasurement as addMeasurementApi } from "../../se
 import styles from '../css/ListMeasurements.module.css'
 import Modal from './Modal'
 
-function AllMeasurements({ user, weightEntry, refresh, onRefresh }) {
+function AllMeasurements({ user, measurements, refresh, onRefresh }) {
 
     const { preferences, isLoading: prefsLoading } = useUserPreferences(user?.id)
     const { entries, isLoading } = useMeasurementsByUser(user?.id, refresh)

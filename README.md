@@ -1,20 +1,23 @@
 # WeightTracker
 
-A full-stack body measurement tracking application built with Spring Boot and React. Users can register, log in, and track weekly measurements with progress monitoring.
+A full-stack body measurement tracking application built with Spring Boot and React. Users can register, log in, and track body measurements with progress monitoring.
 
 ## Features
 
 - JWT-based authentication — registration and login
+- Animated onboarding — users choose which measurements to track on first login
 - BMI calculation with a visual scale indicator
-- Weekly measurement logging — weight, waist and chest circumference
+- Measurement logging — customizable per user (weight, waist, chest, and more)
 - User profile dashboard with start weight, target weight and start date
+- Dark mode support
+- Mobile-first responsive design with hamburger navigation
 
 ## Tech Stack
 
 ### Backend
 - Java 17
-- Spring Boot 4
-- Spring Data JPA
+- Spring Boot
+- Spring Data JPA / Hibernate
 - Spring Security with JWT
 - PostgreSQL
 - Gradle
@@ -31,19 +34,22 @@ A full-stack body measurement tracking application built with Spring Boot and Re
 weighttracker/
 ├── src/
 │   └── main/java/com/example/weighttracker/
-│       ├── auth/               # Registration and login endpoints
-│       ├── user/               # User entity, repository, service, controller
-│       ├── weightentry/        # WeightEntry entity, repository, service, controller
+│       ├── auth/                          # Registration and login endpoints
+│       ├── user/                          # User entity, repository, service, controller
+│       ├── measurement/                   # Measurement entity, repository, service, controller
+│       ├── measurementType/               # MeasurementType entity, repository, service, controller
+│       ├── userMeasurementPreference/     # User measurement preferences
 │       └── shared/
-│           ├── config/         # Security, JWT, CORS configuration
-│           └── converter/      # Encryption converters
+│           ├── config/                    # Security, JWT, CORS configuration
+│           └── converter/                 # Encryption converters
 └── weighttracker-frontend/
     └── src/
         ├── components/
-        │   ├── auth/           # Sign in page
+        │   ├── auth/           # Sign in and registration pages
         │   ├── bmi/            # BMI calculator and scale
-        │   ├── layout/         # Header, Layout
-        │   └── user/           # UserProfile, UserData, AddMeasurement, RecentMeasurements, AllMeasurements
+        │   ├── home/           # Home page
+        │   ├── layout/         # Navbar, Layout
+        │   └── user/           # UserProfile, AllMeasurements, RecentMeasurements, MeasurementPreferencesSetup
         ├── hooks/              # Custom React hooks
         └── services/           # API service layer
 ```
@@ -67,7 +73,7 @@ CREATE DATABASE weighttracker;
 spring.datasource.url=jdbc:postgresql://localhost:5432/weighttracker
 spring.datasource.username=your_username
 spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=validate
 jwt.secret=your_jwt_secret_min_32_chars
 ```
 
@@ -80,6 +86,12 @@ Backend runs on `http://localhost:8080`
 
 ### Frontend
 
+1. Create `.env.local` in `weighttracker-frontend/`:
+```
+VITE_API_URL=http://localhost:8080
+```
+
+2. Run:
 ```bash
 cd weighttracker-frontend
 npm install
@@ -101,17 +113,30 @@ Frontend runs on `http://localhost:5173`
 |--------|----------|-------------|
 | GET | `/api/users/me` | Get current authenticated user |
 | PUT | `/api/users/update/{id}` | Update user data |
-| PATCH | `/api/users/update/{id}/weight` | Update current weight |
-| DELETE | `/api/users/delete/{id}` | Delete user |
+| PATCH | `/api/users/{id}/preferences-configured` | Mark preferences as configured |
 
 ### Measurements
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/weightentry` | Get all entries |
-| GET | `/api/weightentry/user/{userId}` | Get entries for a specific user |
-| POST | `/api/weightentry/create` | Add measurement |
-| PUT | `/api/weightentry/update/{id}` | Update entry |
-| DELETE | `/api/weightentry/delete/{id}` | Delete entry |
+| GET | `/measurements/{userId}` | Get measurements for a user |
+| POST | `/measurements` | Add a new measurement |
+| DELETE | `/measurements/{id}` | Delete a measurement |
+
+### Measurement Types
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/measurement-types` | Get all available measurement types |
+
+### Preferences
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/preferences/{userId}` | Get user measurement preferences |
+| POST | `/preferences` | Save user measurement preferences |
+
+## Live Demo
+
+- Frontend: [weighttracker-two.vercel.app](https://weighttracker-two.vercel.app)
+- Demo account: `demo@weighttracker.com` / `demo123`
 
 ## Status
 

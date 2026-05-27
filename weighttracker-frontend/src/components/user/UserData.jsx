@@ -1,17 +1,32 @@
 import styles from '../css/UserData.module.css'
-import { updateUser } from "../../services/api"
+import { updateUser, updatePreferences, getMeasurementTypes } from "../../services/api"
 import Modal from "./Modal"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import useUserPreferences from '../../hooks/useUserPreferences'
+import useMeasurementTypes from '../../hooks/useMeasurementTypes'
 import "../css/App.css"
 
 function UserData({ user, onRefresh, refresh }) {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isUserUpdateOpen, setisUserUpdateOpen] = useState(false)
+    const [isMeasurementsPreferencesOpen, setisMeasurementsPreferencesOpen] = useState(false)
+    const { preferences, isLoading: prefsLoading } = useUserPreferences(user?.id)
+    const { measurementTypes, isLoading: mtLoading } = useMeasurementTypes()
+    const [selected, setSelected] = useState(preferences.map(pref => pref.measurementType.id))
     const [age, setAge] = useState(user?.age)
     const [height, setHeight] = useState(user?.height)
     const [startWeight, setStartWeight] = useState(user?.startWeight)
     const [targetWeight, setTargetWeight] = useState(user?.targetWeight)
     const [startDate, setStartDate] = useState(user?.startDate)
+
+    useEffect(() => {
+        if (preferences.length > 0) {
+            setSelected(preferences.map(p => p.measurementType.id))
+        }
+    }, [preferences])
+
+
+
 
     if (!user) return null
 
@@ -19,7 +34,7 @@ function UserData({ user, onRefresh, refresh }) {
     const handleUpdate = () => {
         updateUser(user.id.toString(), { age, height, startWeight, targetWeight, startDate })
             .then(() => {
-                setIsOpen(false)
+                setisUserUpdateOpen(false)
                 onRefresh()
             })
     }
@@ -46,8 +61,9 @@ function UserData({ user, onRefresh, refresh }) {
                 </tbody>
             </table>
 
-            <button className="greenButton" onClick={() => setIsOpen(true)} >Update data</button>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <button className="greenButton" onClick={() => setisUserUpdateOpen(true)} >Update data</button>
+
+            <Modal isOpen={isUserUpdateOpen} onClose={() => setisUserUpdateOpen(false)}>
                 <h2>Update User Data</h2>
                 <p>Edit your information below:</p>
                 <label>Your age</label>
@@ -61,7 +77,43 @@ function UserData({ user, onRefresh, refresh }) {
                 <label>Start date</label>
                 <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
                 <button className="greenButton" onClick={handleUpdate}>Save</button>
-                <button className="redButton" onClick={() => setIsOpen(false)}>Close</button>
+                <button className="redButton" onClick={() => setisUserUpdateOpen(false)}>Close</button>
+            </Modal>
+
+            <button className="greenButton" onClick={() => setisMeasurementsPreferencesOpen(true)} >Update measurements preferences</button>
+            <Modal isOpen={isMeasurementsPreferencesOpen} onClose={() => setisMeasurementsPreferencesOpen(false)}>
+                <p style={{ fontSize: '1rem', alignItems: 'center' }}>Here you can choose which measurements you want to track.</p>
+                <div className={styles.container}>
+                    {measurementTypes.map(mt => (
+                        <div key={mt.id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <label className={styles.name}>{mt.name}</label>
+                            <input
+                                className={styles.checkbox}
+                                type="checkbox"
+                                checked={selected.includes(mt.id)}
+                                onChange={() => {
+                                    if (selected.includes(mt.id)) {
+                                        setSelected(selected.filter(id => id !== mt.id))
+                                    } else {
+                                        setSelected([...selected, mt.id])
+                                    }
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <button className="greenButton" onClick={() =>
+                    updatePreferences(user.id, selected.map(id => ({
+                        user: { id: user.id },
+                        measurementType: { id: id }
+                    })))
+                        .then(() => {
+                            setisMeasurementsPreferencesOpen(false)
+                            onRefresh()
+                        })
+                }>Save</button>
+                <button className="redButton" onClick={() => setisMeasurementsPreferencesOpen(false)}>Close</button>
+
             </Modal>
         </div>
     )
