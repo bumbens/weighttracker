@@ -5,7 +5,7 @@ import styles from '../css/MeasurementPreferencesSetup.module.css'
 
 function MeasurementPreferencesSetup({ user, onRefresh }) {
 
-    const preferences = useMeasurementTypes(user?.id)
+    const { measurementTypes, isLoading: prefsLoading } = useMeasurementTypes(user?.id)
     const [selected, setSelected] = useState([])
     const [step, setStep] = useState(0)
     const [leaving, setLeaving] = useState(false)
@@ -33,6 +33,7 @@ function MeasurementPreferencesSetup({ user, onRefresh }) {
                     <h2 className={`${leaving ? styles.fadeOut : styles.fadeIn} ${styles.heading}`}>What would you like to track?</h2>
                 </>
             }            {step === 3 && <div className={leaving ? styles.fadeOut : styles.fadeIn}>
+                {prefsLoading ? null : (
                 <table className={styles.table}>
                     <thead>
                         <tr>
@@ -41,7 +42,7 @@ function MeasurementPreferencesSetup({ user, onRefresh }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {preferences.map(entry => (
+                        {measurementTypes.map(entry => (
                             <tr key={entry.id}>
                                 <td>{entry.name}</td>
                                 <td>
@@ -62,6 +63,7 @@ function MeasurementPreferencesSetup({ user, onRefresh }) {
                         ))}
                     </tbody>
                 </table>
+                )}
                 <button onClick={() =>
                     savePreferences(selected.map(id => ({ user: { id: user.id }, measurementType: { id: id } })))
                         .then(() => setPreferencesConfigured(user.id))

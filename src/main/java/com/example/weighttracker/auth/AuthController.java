@@ -39,6 +39,7 @@ public class AuthController {
         user.setStartWeight(request.getStartWeight());
         user.setTargetWeight(request.getTargetWeight());
         user.setCurrentWeight(request.getStartWeight());
+        user.setPreferencesConfigured(false);
         user.setStartDate(LocalDate.now());
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "User registered succesfully"));

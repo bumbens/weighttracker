@@ -11,4 +11,5 @@ public class RegisterRequest {
     private Integer height;
     private Double startWeight;
     private Double targetWeight;
+    private Boolean preferences_configured;
 }
