@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getMeasurementTypes } from "../services/api";
 
 function useMeasurementTypes() {
-    const [ measurementTypes, setMeasurementTypes ] = useState([])
+    const [measurementTypes, setMeasurementTypes] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {

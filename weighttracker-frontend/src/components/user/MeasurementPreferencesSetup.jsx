@@ -64,7 +64,9 @@ function MeasurementPreferencesSetup({ user, onRefresh }) {
                     </tbody>
                 </table>
                 )}
-                <button onClick={() =>
+                <button
+                    disabled={selected.length === 0} 
+                    onClick={() =>
                     savePreferences(selected.map(id => ({ user: { id: user.id }, measurementType: { id: id } })))
                         .then(() => setPreferencesConfigured(user.id))
                         .then(() => onRefresh())
